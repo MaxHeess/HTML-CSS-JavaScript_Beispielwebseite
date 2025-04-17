@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glückskekse</title>
+
+    <link rel="icon" href="icon.png" type="image/png">
+
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .hero-section {
+            background-image: url("header.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        #open-cookie-btn {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        #open-cookie-btn:hover {
+            background-color: #9b9692;
+        }
+
+        #fortune-text {
+            margin-top: 20px;
+            font-size: 22px;
+            font-style: italic;
+            color: white;
+        }
+
+        .fortune-hidden {
+            display: none;
+        }
+
+        .fortune-visible {
+            display: block;
+        }
+
+        .generator {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .generator img {
+            max-width: 100px;
+        }
+
+        .generator-before img {
+            display: block;
+        }
+
+        .generator-after {
+            display: none;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .generator-message {
+            padding: 10px;
+            background-color: #fffbea;
+            border: 1px solid #d4c8a2;
+            margin: 0 10px;
+        }
+
+        .generator-message-txt {
+            font-size: 18px;
+            font-style: italic;
+            color: #333;
+        }
+
+        #back-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #back-btn:hover {
+            background-color: #9b9692;
+        }
+
+        .social-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        .social-buttons a {
+            margin: 0 15px; 
+        }
+
+        .social-buttons img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .social-buttons a:hover img {
+            opacity: 0.7;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Glückskekse</h1>
+            <p>Entdecke deinen persönlichen Glückskeks</p>
+            <button id="open-cookie-btn">Deinen Glückskeks öffnen</button>
+            <p id="fortune-text" class="fortune-hidden"></p>
+
+            <div class="generator">
+                <div class="generator-before">
+                    <img src="glueckskeks-closed.png" alt="Geschlossener Glückskeks">
+                </div>
+                <div class="generator-after">
+                    <img src="glueckskeks-open-left.png" alt="Linke Seite eines geöffneten Glückskekses">
+                    <div class="generator-message">
+                        <div class="generator-message-txt" id="fortune-cookie-message"></div>
+                    </div>
+                    <img src="glueckskeks-open-right.png" alt="Rechte Seite eines geöffneten Glückskekses">
+                </div>
+            </div>
+
+            <div class="social-buttons" id="social-buttons">
+                <a href="#" id="facebook-share" target="_blank">
+                    <img src="facebook_icon.png" alt="Facebook teilen">
+                </a>
+                <a href="#" id="instagram-share" target="_blank">
+                    <img src="instagram_icon.png" alt="Instagram teilen">
+                </a>
+                <a href="#" id="twitter-share" target="_blank">
+                    <img src="x_icon.png" alt="X (Twitter) teilen">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <button id="back-btn">Zurück</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fortunes = [
+                "Du wirst bald eine positive Überraschung erleben.",
+                "Ein Lächeln ist die beste Antwort.",
+                "Geduld bringt Rosen.",
+                "Vertraue auf deine Intuition.",
+                "Ein neuer Anfang erwartet dich.",
+                "Gutes kommt zu denen, die warten.",
+                "Ein großes Abenteuer steht vor der Tür.",
+                "Deine Freundlichkeit wird belohnt werden.",
+                "Der Erfolg ist näher, als du denkst.",
+                "Das Glück ist auf deiner Seite.",
+                "Glaube an dich selbst.",
+                "Deine Bemühungen werden bald belohnt.",
+                "Ein neues Abenteuer wartet auf dich.",
+                "Teile dein Glück mit anderen.",
+                "Du wirst eine unerwartete Nachricht erhalten.",
+                "Vertrauen ist der Schlüssel zum Erfolg.",
+                "Harte Arbeit zahlt sich aus.",
+                "Ein Freund wird dir bald helfen.",
+                "Eine Reise bringt neue Erkenntnisse.",
+                "Folge deinem Herzen.",
+                "Das Glück ist auf deiner Seite.",
+                "Nimm dir Zeit für dich selbst.",
+                "Heute ist ein guter Tag für neue Herausforderungen.",
+                "Geduld wird dir Erfolg bringen.",
+                "Du wirst bald eine wichtige Entscheidung treffen.",
+                "Bleib optimistisch, die besten Dinge kommen noch.",
+                "Erfolg liegt in deiner Zukunft.",
+                "Heute ist der erste Tag deines neuen Lebens.",
+                "Eine positive Einstellung führt zum Erfolg.",
+                "Ein unerwarteter Gast wird Freude bringen.",
+                "Freundlichkeit wird dir bald begegnen.",
+                "Etwas Wunderbares wird dir passieren.",
+                "Du wirst bald stolz auf deine Leistungen sein.",
+                "Glück wird deine Bemühungen begleiten.",
+                "Vertraue dem Prozess, alles kommt zur richtigen Zeit.",
+                "Liebe wird den Weg weisen.",
+                "Veränderungen führen zu Wachstum.",
+                "Gute Dinge brauchen Zeit.",
+                "Eine neue Perspektive wird dir neue Wege öffnen.",
+                "Du bist auf dem richtigen Weg."
+            ];
+
+            const btn = document.getElementById('open-cookie-btn');
+            const fortuneText = document.getElementById('fortune-text');
+            const generatorBefore = document.querySelector('.generator-before');
+            const generatorAfter = document.querySelector('.generator-after');
+            const fortuneCookieMessage = document.getElementById('fortune-cookie-message');
+            const socialButtons = document.getElementById('social-buttons');
+            const facebookShareBtn = document.getElementById('facebook-share');
+            const twitterShareBtn = document.getElementById('twitter-share');
+            const instagramShareBtn = document.getElementById('instagram-share');
+
+            let cookieOpened = false;
+
+            btn.addEventListener('click', function () {
+                if (cookieOpened) {
+                    return;
+                }
+
+                const randomIndex = Math.floor(Math.random() * fortunes.length);
+                const selectedFortune = fortunes[randomIndex];
+
+                generatorBefore.style.display = 'none';
+                generatorAfter.style.display = 'flex';
+
+                fortuneCookieMessage.textContent = selectedFortune;
+
+                cookieOpened = true;
+
+                btn.disabled = true;
+                btn.style.backgroundColor = "red";
+
+                socialButtons.style.display = 'flex';
+
+                const encodedFortune = encodeURIComponent(selectedFortune);
+                facebookShareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com&quote=${encodedFortune}`;
+                twitterShareBtn.href = `https://twitter.com/intent/tweet?text=${encodedFortune}`;
+                instagramShareBtn.href = `https://www.instagram.com/?text=${encodedFortune}`; // You might need to change this to match your Instagram sharing method
+            });
+
+            const backBtn = document.getElementById('back-btn');
+            backBtn.addEventListener('click', function () {
+                window.location.href = 'https://gkberlin5.wordpress.com/?_gl=1%2Aekhiqi%2A_gcl_au%2ANjkxMDEyOTQ4LjE3MjczMzMwNzg.';
+            });
+        });
+    </script>
+
+</body>
+</html>
