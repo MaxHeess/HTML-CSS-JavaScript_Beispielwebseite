@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glückskekse</title>
+
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Glückskekse</h1>
+            <p>Entdecke deinen persönlichen Glückskeks</p>
+            <button id="open-cookie-btn">Deinen Glückskeks öffnen</button>
+            <p id="fortune-text" class="fortune-hidden"></p>
+
+            <div class="generator">
+                <div class="generator-before">
+                    <img src="glueckskeks-closed.png" alt="Geschlossener Glückskeks">
+                </div>
+                <div class="generator-after">
+                    <img src="glueckskeks-open-left.png" alt="Linke Seite eines geöffneten Glückskekses">
+                    <div class="generator-message">
+                        <div class="generator-message-txt" id="fortune-cookie-message"></div>
+                    </div>
+                    <img src="glueckskeks-open-right.png" alt="Rechte Seite eines geöffneten Glückskekses">
+                </div>
+            </div>
+
+            <div class="social-buttons" id="social-buttons">
+                <a href="#" id="facebook-share" target="_blank">
+                    <img src="facebook_icon.png" alt="Facebook teilen">
+                </a>
+                <a href="#" id="instagram-share" target="_blank">
+                    <img src="instagram_icon.png" alt="Instagram teilen">
+                </a>
+                <a href="#" id="twitter-share" target="_blank">
+                    <img src="x_icon.png" alt="X (Twitter) teilen">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <button id="back-btn">Zurück</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
